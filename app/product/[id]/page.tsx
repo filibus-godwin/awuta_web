@@ -1,6 +1,5 @@
 // app/product/[id]/page.tsx
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
 import ProductClient from "./ProductClient";
 
 const SUPABASE_PUBLIC_URL =
@@ -16,24 +15,26 @@ async function getProduct(id: string) {
   return res.json();
 }
 
-/* 🔥 WHATSAPP / FACEBOOK / TWITTER PREVIEW */
+// 🔥 THIS CONTROLS WHATSAPP / FACEBOOK / TWITTER PREVIEW
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const product = await getProduct(params.id);
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const product = await getProduct(id);
+
   if (!product) return {};
 
   const image = product.listing_media?.[0]?.path
-    ? `${SUPABASE_PUBLIC_URL}${product.listing_media[0].path}`
-    : "https://awuta-landing-beta.netlify.app/placeholder-image.png";
+    ? `${SUPABASE_PUBLIC_URL}/${product.listing_media[0].path}`
+    : "/placeholder-image.png";
 
   const description =
     product.description ||
     `Buy ${product.title} for ₦${product.price?.value?.toLocaleString()}`;
 
-  const url = `https://awuta-landing-beta.netlify.app/product/${product.id}`;
+  const url = `https://your-domain.com/product/${id}`;
 
   return {
     title: product.title,
@@ -43,8 +44,7 @@ export async function generateMetadata({
       title: product.title,
       description,
       url,
-      siteName: "Awuta Marketplace",
-      type: "website",
+      siteName: "Your Marketplace",
       images: [
         {
           url: image,
@@ -53,6 +53,7 @@ export async function generateMetadata({
           alt: product.title,
         },
       ],
+      type: "website",
     },
 
     twitter: {
@@ -67,9 +68,11 @@ export async function generateMetadata({
 export default async function ProductPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const product = await getProduct(params.id);
+  const { id } = await params;
+  const product = await getProduct(id);
+
   if (!product) notFound();
 
   return (
