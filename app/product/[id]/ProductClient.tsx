@@ -44,22 +44,28 @@ export default function ProductClient({ product }: { product: any }) {
 
           {images.length > 1 && (
             <div className="flex gap-3 overflow-x-auto py-2">
-              {images.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setSelectedImage(i)}
-                  className={`w-20 h-20 rounded-xl overflow-hidden border-2 ${
-                    selectedImage === i ? "border-blue-600" : "border-gray-200"
-                  }`}
-                >
-                  <img
-                    src={getImageSrc(i)}
-                    alt={`${product.title} ${i + 1}`}
-                    className="w-full h-full object-cover"
-                    onError={() => handleImageError(i)}
-                  />
-                </button>
-              ))}
+              {images.length > 1 && (
+                <div className="flex gap-3 overflow-x-auto py-2">
+                  {images.map((src: string, i: number) => (
+                    <button
+                      key={i}
+                      onClick={() => setSelectedImage(i)}
+                      className={`w-20 h-20 rounded-xl overflow-hidden border-2 ${
+                        selectedImage === i
+                          ? "border-blue-600"
+                          : "border-gray-200"
+                      }`}
+                    >
+                      <img
+                        src={getImageSrc(i)}
+                        alt={`${product.title} ${i + 1}`}
+                        className="w-full h-full object-cover"
+                        onError={() => handleImageError(i)}
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
