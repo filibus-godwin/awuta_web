@@ -69,3 +69,339 @@ body {
 * {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+
+/* Terms Page Specific Styles */
+.terms-content {
+  line-height: 1.8;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.terms-content h1:first-of-type {
+  margin-top: 0 !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.terms-content h2 {
+  scroll-margin-top: 6rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.terms-content h2:hover {
+  transform: translateX(4px);
+}
+
+.terms-content h2:hover::before {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 80%;
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 3px;
+  opacity: 1;
+}
+
+.terms-content h3 {
+  scroll-margin-top: 6rem;
+}
+
+.terms-content a {
+  word-break: break-word;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.terms-content a:hover {
+  transform: translateY(-2px);
+}
+
+.terms-content ul li,
+.terms-content ol li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.terms-content ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  width: 8px;
+  height: 8px;
+  background: #3b82f6;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.terms-content ol {
+  counter-reset: item;
+}
+
+.terms-content ol li::before {
+  content: counter(item) ". ";
+  counter-increment: item;
+  position: absolute;
+  left: 0;
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+/* Table of Contents styling */
+.terms-content > div:nth-of-type(3) {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px !important;
+  margin-top: 1.5rem !important;
+}
+
+.terms-content > div:nth-of-type(3) > li {
+  margin-bottom: 0 !important;
+}
+
+/* Section numbering styling */
+.terms-content h3[id]::before {
+  content: attr(id);
+  position: absolute;
+  left: -3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.terms-content h3:hover::before {
+  opacity: 1;
+}
+
+/* Custom scrollbar for the main content */
+.terms-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.terms-content::-webkit-scrollbar-track {
+  background: linear-gradient(to bottom, #f1f5f9, #e2e8f0);
+  border-radius: 10px;
+}
+
+.dark .terms-content::-webkit-scrollbar-track {
+  background: linear-gradient(to bottom, #1e293b, #0f172a);
+}
+
+.terms-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.terms-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #2563eb, #7c3aed);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terms-content h1 {
+    font-size: 2.25rem !important;
+  }
+
+  .terms-content h2 {
+    font-size: 1.75rem !important;
+  }
+
+  .terms-content h3 {
+    font-size: 1.5rem !important;
+  }
+
+  .terms-content > div:nth-of-type(3) {
+    grid-template-columns: 1fr !important;
+  }
+
+  .terms-content p {
+    font-size: 1rem !important;
+  }
+
+  html {
+    scroll-padding-top: 4rem;
+  }
+}
+
+/* Active section highlight */
+.terms-content :target {
+  animation: highlight 2s ease;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* Table of Contents active item */
+.terms-content > div:nth-of-type(3) a.active {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+  color: white !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+.terms-content > div:nth-of-type(3) a.active .w-10 {
+  background: white !important;
+  color: #3b82f6 !important;
+}
+/* Privacy Policy Specific Styles */
+.privacy-markdown {
+  line-height: 1.8;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* Table of Contents styling */
+.privacy-markdown > div > .grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .privacy-markdown > div > .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .privacy-markdown h1 {
+    font-size: 2.25rem !important;
+  }
+
+  .privacy-markdown h2 {
+    font-size: 1.75rem !important;
+  }
+
+  .privacy-markdown h3 {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Active section highlight */
+.privacy-markdown :target {
+  animation: privacy-highlight 1.5s ease;
+  padding-left: 1rem;
+  margin-left: -1rem;
+  border-left: 4px solid #10b981;
+  border-radius: 0 4px 4px 0;
+}
+
+@keyframes privacy-highlight {
+  0% {
+    background-color: rgba(16, 185, 129, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* Scroll margin for better scrolling */
+.privacy-markdown h2,
+.privacy-markdown h3 {
+  scroll-margin-top: 6rem;
+}
+
+/* Better list styling with emerald theme */
+.privacy-markdown ul li,
+.privacy-markdown ol li {
+  margin-bottom: 0.75rem;
+}
+
+.privacy-markdown ul li::marker {
+  color: #10b981;
+}
+
+.privacy-markdown ol li::marker {
+  color: #10b981;
+  font-weight: bold;
+}
+
+/* Section number styling */
+.privacy-markdown h3[id^="1-"],
+.privacy-markdown h3[id^="2-"],
+.privacy-markdown h3[id^="3-"],
+.privacy-markdown h3[id^="4-"],
+.privacy-markdown h3[id^="5-"],
+.privacy-markdown h3[id^="6-"],
+.privacy-markdown h3[id^="7-"],
+.privacy-markdown h3[id^="8-"],
+.privacy-markdown h3[id^="9-"],
+.privacy-markdown h3[id^="10-"],
+.privacy-markdown h3[id^="11-"],
+.privacy-markdown h3[id^="12-"],
+.privacy-markdown h3[id^="13-"] {
+  position: relative;
+}
+
+/* Letter sections styling (like a., b., etc.) */
+.privacy-markdown h3[id^="a-"],
+.privacy-markdown h3[id^="b-"] {
+  position: relative;
+  margin-left: 1rem;
+}
+
+/* Dark mode adjustments */
+.dark .privacy-markdown {
+  color: #e5e7eb;
+}
+
+.dark .privacy-markdown :target {
+  border-left-color: #34d399;
+}
+
+.dark .privacy-markdown ul li::marker {
+  color: #34d399;
+}
+
+.dark .privacy-markdown ol li::marker {
+  color: #34d399;
+}
+
+/* Privacy badge hover effects */
+.bg-emerald-50:hover,
+.bg-blue-50:hover,
+.bg-purple-50:hover,
+.bg-amber-50:hover {
+  transform: translateY(-4px);
+  transition: transform 0.3s ease;
+}
+
+/* Smooth transitions for all interactive elements */
+.privacy-markdown a,
+.privacy-markdown .grid a {
+  transition: all 0.2s ease;
+}
+
+.privacy-markdown .grid a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+.dark .privacy-markdown .grid a:hover {
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
