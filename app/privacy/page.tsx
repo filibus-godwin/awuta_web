@@ -293,10 +293,15 @@ export default function PrivacyPolicyPage() {
                   li: ({ node, children, ...props }) => {
                     // Check if it's a TOC item
                     const isTocItem = React.Children.toArray(children).some(
-                      (child) =>
-                        typeof child === "object" &&
-                        "props" in child &&
-                        child.props?.href?.startsWith("#")
+                      (child) => {
+                        if (!React.isValidElement(child)) return false;
+
+                        const props = child.props as { href?: string };
+                        return (
+                          typeof props.href === "string" &&
+                          props.href.startsWith("#")
+                        );
+                      }
                     );
 
                     if (isTocItem) {
@@ -306,13 +311,21 @@ export default function PrivacyPolicyPage() {
                             {React.Children.map(children, (child) => {
                               if (
                                 React.isValidElement(child) &&
+                                typeof child.type === "string" &&
                                 child.type === "a"
                               ) {
-                                const href = child.props.href;
-                                const text = child.props.children;
-                                const numberMatch = text
-                                  ?.toString()
-                                  .match(/^(\d+)\.\s*(.*)/);
+                                const { href, children: linkChildren } =
+                                  child.props as {
+                                    href?: string;
+                                    children?: React.ReactNode;
+                                  };
+
+                                if (!href) return child;
+
+                                const text =
+                                  React.Children.toArray(linkChildren).join("");
+                                const numberMatch =
+                                  text.match(/^(\d+)\.\s*(.*)/);
 
                                 return (
                                   <a
@@ -320,14 +333,15 @@ export default function PrivacyPolicyPage() {
                                     className="flex items-center gap-3 p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-emerald-300 dark:hover:border-emerald-600 hover:shadow-md transition-all duration-200 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-900/10"
                                   >
                                     <div className="shrink-0 w-8 h-8 rounded-md bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold">
-                                      {numberMatch ? numberMatch[1] : ""}
+                                      {numberMatch?.[1] ?? ""}
                                     </div>
                                     <span className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
-                                      {numberMatch ? numberMatch[2] : text}
+                                      {numberMatch?.[2] ?? text}
                                     </span>
                                   </a>
                                 );
                               }
+
                               return child;
                             })}
                           </div>

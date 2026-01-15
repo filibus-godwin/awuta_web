@@ -193,10 +193,15 @@ export default function TermsPage() {
                   li: ({ node, children, ...props }) => {
                     // Check if it's a TOC item
                     const isTocItem = React.Children.toArray(children).some(
-                      (child) =>
-                        typeof child === "object" &&
-                        "props" in child &&
-                        child.props?.href?.startsWith("#")
+                      (child) => {
+                        if (!React.isValidElement(child)) return false;
+
+                        const props = child.props as { href?: string };
+                        return (
+                          typeof props.href === "string" &&
+                          props.href.startsWith("#")
+                        );
+                      }
                     );
 
                     if (isTocItem) {
@@ -206,13 +211,21 @@ export default function TermsPage() {
                             {React.Children.map(children, (child) => {
                               if (
                                 React.isValidElement(child) &&
+                                typeof child.type === "string" &&
                                 child.type === "a"
                               ) {
-                                const href = child.props.href;
-                                const text = child.props.children;
-                                const numberMatch = text
-                                  ?.toString()
-                                  .match(/^(\d+)\.\s*(.*)/);
+                                const { href, children: linkChildren } =
+                                  child.props as {
+                                    href?: string;
+                                    children?: React.ReactNode;
+                                  };
+
+                                if (!href) return child;
+
+                                const text =
+                                  React.Children.toArray(linkChildren).join("");
+                                const numberMatch =
+                                  text.match(/^(\d+)\.\s*(.*)/);
 
                                 return (
                                   <a
@@ -220,14 +233,15 @@ export default function TermsPage() {
                                     className="flex items-center gap-3 p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-md transition-all duration-200"
                                   >
                                     <div className="shrink-0 w-8 h-8 rounded-md bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold">
-                                      {numberMatch ? numberMatch[1] : ""}
+                                      {numberMatch?.[1] ?? ""}
                                     </div>
                                     <span className="font-medium text-gray-800 dark:text-gray-200">
-                                      {numberMatch ? numberMatch[2] : text}
+                                      {numberMatch?.[2] ?? text}
                                     </span>
                                   </a>
                                 );
                               }
+
                               return child;
                             })}
                           </div>
