@@ -39,9 +39,7 @@ export default function Footer() {
       title: "Company",
       links: [
         { label: "About Us", href: "/about", icon: Users },
-        { label: "Careers", href: "/careers", icon: ArrowUpRight },
         { label: "Contact", href: "/contact", icon: MessageSquare },
-        { label: "Press", href: "/press", icon: ArrowUpRight },
       ],
     },
     {
@@ -49,7 +47,6 @@ export default function Footer() {
       links: [
         { label: "Help Center", href: "/help", icon: ArrowUpRight },
         { label: "Blog", href: "/blog", icon: ArrowUpRight },
-        { label: "API Docs", href: "/api", icon: ArrowUpRight },
         { label: "Community", href: "/community", icon: Users },
       ],
     },
@@ -59,7 +56,6 @@ export default function Footer() {
         { label: "Privacy Policy", href: "/privacy", icon: Shield },
         { label: "Terms of Service", href: "/terms", icon: ArrowUpRight },
         { label: "Cookie Policy", href: "/cookies", icon: ArrowUpRight },
-        { label: "GDPR", href: "/gdpr", icon: Globe },
       ],
     },
   ];
@@ -82,7 +78,11 @@ export default function Footer() {
   const contactInfo = [
     { icon: Mail, text: "hello@awuta.com", href: "mailto:hello@awuta.com" },
     { icon: Phone, text: "+234 810 646 9653", href: "tel:08106469653" },
-    { icon: MapPin, text: "Nigeria", href: "#" },
+    {
+      icon: MapPin,
+      text: "Flat 1, House No. 4 Off Dass Park Road, Dogon Yaro Roundabout, Bauchi, Bauchi State.",
+      href: "#",
+    },
   ];
 
   return (
@@ -109,7 +109,9 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-
+            <p className="text-gray-600 dark:text-gray-400 max-w-md leading-relaxed">
+              Awuta is a product of Defsignal
+            </p>
             <p className="text-gray-600 dark:text-gray-400 max-w-md leading-relaxed">
               The future of marketplace transactions. Connecting verified
               vendors with premium buyers in a secure, seamless ecosystem.
