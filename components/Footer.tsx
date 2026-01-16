@@ -189,7 +189,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Copyright */}
           <div className="text-gray-500 dark:text-gray-500 text-sm">
-            © {currentYear} Awuta Data. All rights reserved.
+            © {currentYear} Awuta. All rights reserved.
             <span className="mx-2">•</span>
             <span className="inline-flex items-center gap-1">
               Made with <Heart className="w-3 h-3 text-red-500 fill-red-500" />{" "}
