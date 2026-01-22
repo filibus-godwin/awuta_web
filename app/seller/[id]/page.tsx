@@ -4,10 +4,13 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 async function getAllProducts() {
-  const res = await fetch(
-    "https://lrugfzihdezsucqxheyn.supabase.co/functions/v1/lst",
-    { cache: "no-store" }
-  );
+  const res = await fetch("https://dev.awuta.com/api/public/lst", {
+    cache: "no-store",
+    // Optional: Add headers if needed
+    // headers: {
+    //   'Authorization': 'Bearer your-token',
+    // }
+  });
 
   if (!res.ok) return null;
   return res.json();
@@ -26,8 +29,9 @@ export async function generateMetadata({
       title: "Seller Not Found | Awuta",
     };
 
+  // Filter products by author ID (seller ID in the new API)
   const sellerProducts = products.filter(
-    (product: any) => product.seller?.id === sellerId
+    (product: any) => product.author?.id === sellerId,
   );
 
   if (sellerProducts.length === 0)
@@ -35,9 +39,8 @@ export async function generateMetadata({
       title: "Seller Not Found | Awuta",
     };
 
-  const seller = sellerProducts[0].seller;
-  const sellerName =
-    seller.business?.name || `${seller.first_name} ${seller.last_name}`;
+  const seller = sellerProducts[0].author;
+  const sellerName = seller.business?.name || seller.name || "Seller";
   const productCount = sellerProducts.length;
 
   return {
@@ -61,13 +64,14 @@ export default async function SellerPage({
   const products = await getAllProducts();
   if (!products || products.length === 0) notFound();
 
+  // Filter products by author ID (seller ID in the new API)
   const sellerProducts = products.filter(
-    (product: any) => product.seller?.id === sellerId
+    (product: any) => product.author?.id === sellerId,
   );
 
   if (sellerProducts.length === 0) notFound();
 
-  const seller = sellerProducts[0].seller;
+  const seller = sellerProducts[0].author;
 
   return <SellerClient seller={seller} products={sellerProducts} />;
 }

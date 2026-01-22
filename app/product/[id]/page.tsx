@@ -2,17 +2,23 @@
 import { notFound } from "next/navigation";
 import ProductClient from "./ProductClient";
 
-const SUPABASE_PUBLIC_URL =
-  "https://lrugfzihdezsucqxheyn.supabase.co/storage/v1/object/public/";
-
 async function getProduct(id: string) {
-  const res = await fetch(
-    `https://lrugfzihdezsucqxheyn.supabase.co/functions/v1/lst/${id}`,
-    { cache: "no-store" }
-  );
+  const res = await fetch(`https://dev.awuta.com/api/public/lst/${id}`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) return null;
-  return res.json();
+
+  // The API might return the product directly or in a wrapper
+  const data = await res.json();
+
+  // If the API returns an array with one product
+  if (Array.isArray(data)) {
+    return data[0] || null;
+  }
+
+  // If it returns the product directly
+  return data;
 }
 
 export async function generateMetadata({
@@ -25,24 +31,35 @@ export async function generateMetadata({
 
   if (!product) return {};
 
-  const image = product.listing_media?.[0]?.path
-    ? `${SUPABASE_PUBLIC_URL}/${product.listing_media[0].path}`
-    : "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&auto=format&fit=crop";
+  // Get the first image from media
+  const image =
+    product.media?.[0]?.url ||
+    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&auto=format&fit=crop";
+
+  // Create title from description
+  const title = product.description
+    ? product.description.split(" ").slice(0, 6).join(" ") +
+      (product.description.split(" ").length > 6 ? "..." : "")
+    : "Product on Awuta";
+
+  // Extract price if available
+  const priceAspect = product.aspects?.find((aspect: any) =>
+    aspect.aspectName.toLowerCase().includes("price"),
+  );
+  const price = priceAspect?.aspectValue || "";
 
   const description =
     product.description ||
-    `Buy ${
-      product.title
-    } for ₦${product.price?.value?.toLocaleString()}. Premium quality verified by Awuta.`;
+    `Buy ${title} ${price ? `for ₦${price}` : ""}. Premium quality verified by Awuta.`;
 
   const url = `https://awuta.com/product/${id}`;
 
   return {
-    title: `${product.title} | Awuta`,
+    title: `${title} | Awuta`,
     description,
 
     openGraph: {
-      title: product.title,
+      title: title,
       description,
       url,
       siteName: "Awuta",
@@ -51,7 +68,7 @@ export async function generateMetadata({
           url: image,
           width: 1200,
           height: 630,
-          alt: product.title,
+          alt: title,
         },
       ],
       type: "article",
@@ -59,7 +76,7 @@ export async function generateMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title: product.title,
+      title: title,
       description,
       images: [image],
     },

@@ -1,16 +1,15 @@
-// app/products/page.tsx
 import ProductsClient from "./ProductsClient";
 import type { Metadata } from "next";
 
 async function getProducts() {
-  const res = await fetch(
-    "https://lrugfzihdezsucqxheyn.supabase.co/functions/v1/lst",
-    { cache: "no-store" }
-  );
+  const res = await fetch("https://dev.awuta.com/api/public/lst", {
+    cache: "no-store",
+  });
 
   if (!res.ok) throw new Error("Failed to load products");
 
-  return res.json(); // Product[]
+  const data = await res.json();
+  return data; // Return the array directly
 }
 
 export const metadata: Metadata = {

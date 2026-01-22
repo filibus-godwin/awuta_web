@@ -1,357 +1,188 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Zap,
-  Shield,
-  MessageCircle,
-  Bell,
-  Users,
-  CreditCard,
-  TrendingUp,
-  CheckCircle,
-  Lock,
-  Sparkles,
-  Cpu,
-  ArrowRight,
-  ShieldCheck,
-  LineChart,
-  Globe2,
-  SmartphoneIcon,
-  ShieldOff,
-} from "lucide-react";
+import { CheckCircle, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export default function Features() {
   const features = [
     {
-      icon: Zap,
-      title: "Lightning-Fast Discovery",
-      description:
-        "AI-powered search and personalized recommendations deliver relevant products in milliseconds.",
-      benefits: ["Smart filtering", "Instant results", "Personalized feeds"],
-      gradient: "from-blue-500 to-cyan-500",
-      bgGradient:
-        "bg-gradient-to-br from-blue-500/10 via-cyan-500/5 to-blue-500/5",
-      delay: 0.1,
+      title: "Smart Discovery",
+      description: "AI-powered search finds exactly what you're looking for",
+      benefits: ["Personalized results", "Smart filters", "Instant matching"],
     },
     {
-      icon: ShieldCheck,
-      title: "Verified Trust System",
-      description:
-        "Multi-layered verification process ensures every vendor and product meets our quality standards.",
+      title: "Verified Trust",
+      description: "Every vendor and product meets our quality standards",
       benefits: [
         "Vendor verification",
         "Product certification",
         "User reviews",
       ],
-      gradient: "from-emerald-500 to-green-500",
-      bgGradient:
-        "bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-500/5",
-      delay: 0.2,
     },
     {
-      icon: MessageCircle,
-      title: "Smart Communication Hub",
-      description:
-        "Secure, encrypted messaging with AI-assisted responses and file sharing capabilities.",
-      benefits: ["Encrypted chats", "File sharing", "Quick replies"],
-      gradient: "from-purple-500 to-pink-500",
-      bgGradient:
-        "bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-purple-500/5",
-      delay: 0.3,
-    },
-    {
-      icon: LineChart,
-      title: "Advanced Analytics",
-      description:
-        "Comprehensive analytics and management tools to optimize your business performance.",
+      title: "Secure Communication",
+      description: "Encrypted messaging with file sharing capabilities",
       benefits: [
-        "Sales analytics",
-        "Inventory management",
-        "Customer insights",
+        "End-to-end encryption",
+        "Secure file sharing",
+        "Real-time chat",
       ],
-      gradient: "from-orange-500 to-amber-500",
-      bgGradient:
-        "bg-gradient-to-br from-orange-500/10 via-amber-500/5 to-orange-500/5",
-      delay: 0.4,
-    },
-    {
-      icon: Globe2,
-      title: "Global Marketplace",
-      description:
-        "Connect with buyers and vendors worldwide with multi-currency and language support.",
-      benefits: ["Global reach", "Multi-currency", "Localized experience"],
-      gradient: "from-indigo-500 to-violet-500",
-      bgGradient:
-        "bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-indigo-500/5",
-      delay: 0.5,
-    },
-    {
-      icon: Bell,
-      title: "Intelligent Notifications",
-      description:
-        "Smart alerts and real-time updates keep you informed without overwhelming you.",
-      benefits: ["Custom alerts", "Priority notifications", "Quiet hours"],
-      gradient: "from-rose-500 to-pink-500",
-      bgGradient:
-        "bg-gradient-to-br from-rose-500/10 via-pink-500/5 to-rose-500/5",
-      delay: 0.6,
     },
   ];
 
-  const platformFeatures = [
+  const userGroups = [
     {
-      icon: Users,
       title: "For Buyers",
       items: [
-        "Personalized product recommendations",
+        "Personalized recommendations",
         "Secure payment protection",
         "Real-time order tracking",
         "Verified seller ratings",
       ],
-      gradient: "from-blue-500 to-cyan-500",
     },
     {
-      icon: TrendingUp,
       title: "For Vendors",
       items: [
-        "Advanced analytics dashboard",
-        "Automated inventory management",
-        "Marketing tools integration",
+        "Analytics dashboard",
+        "Inventory management",
+        "Marketing tools",
         "Performance insights",
       ],
-      gradient: "from-purple-500 to-pink-500",
     },
     {
-      icon: SmartphoneIcon,
       title: "Mobile Experience",
       items: [
-        "Native iOS & Android apps",
+        "iOS & Android apps",
         "Offline mode support",
         "Push notifications",
-        "Touch ID/Face ID login",
+        "Biometric login",
       ],
-      gradient: "from-emerald-500 to-green-500",
-    },
-  ];
-
-  const securityFeatures = [
-    {
-      icon: Shield,
-      title: "GDPR Compliant",
-      description: "Full compliance with global data protection standards",
-      stat: "100%",
-    },
-    {
-      icon: CreditCard,
-      title: "PCI DSS Certified",
-      description: "Bank-level payment security certification",
-      stat: "Tier 1",
-    },
-    {
-      icon: Lock,
-      title: "256-bit Encryption",
-      description: "Military-grade encryption for all data",
-      stat: "AES-256",
-    },
-    {
-      icon: ShieldOff,
-      title: "Zero Breaches",
-      description: "Perfect security track record",
-      stat: "0 incidents",
     },
   ];
 
   return (
-    <section className="relative py-24 md:py-32 bg-linear-to-b from-white via-gray-50/20 to-white dark:from-gray-900 dark:via-gray-900/95 dark:to-gray-900 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-linear-to-br from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-linear-to-tr from-purple-500/10 to-pink-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-px bg-linear-to-r from-transparent via-gray-200/30 to-transparent dark:via-gray-700/20" />
+    <section className="relative py-20 md:py-32 bg-white dark:bg-gray-900 overflow-hidden">
+      {/* Minimal background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-50 dark:bg-purple-900/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto mb-16 md:mb-24"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16 md:mb-24"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 border border-blue-500/20 dark:border-blue-500/30 mb-6">
-            <Cpu className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span className="text-sm font-medium bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-              PREMIUM FEATURES
-            </span>
+          <div className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4 tracking-widest uppercase">
+            <div className="w-1 h-1 rounded-full bg-purple-500" />
+            Features
+            <div className="w-1 h-1 rounded-full bg-purple-500" />
           </div>
-        </motion.div>
-        <motion.div>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-            <span className="bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-300 dark:to-white bg-clip-text text-transparent">
-              Engineered for{" "}
-            </span>
-            <span className="bg-linear-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-              Excellence
-            </span>
+
+          <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white tracking-tight mb-4">
+            Designed for <span className="font-medium">Modern Commerce</span>
           </h2>
 
-          <p className="mt-6 text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Powerful tools and intelligent features that transform how buyers
-            and vendors connect, built with cutting-edge technology and
-            attention to detail.
+          <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+            Intelligent tools that transform how buyers and vendors connect in
+            today's marketplace.
           </p>
         </motion.div>
 
         {/* Main Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-8 mb-20 md:mb-32">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: feature.delay }}
-              whileHover={{ y: -8 }}
-              className="group relative"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative group"
             >
-              {/* Background Glow */}
-              <div
-                className={`absolute inset-0 ${feature.bgGradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-              />
-
-              <div className="relative h-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl border border-gray-200/50 dark:border-gray-700/50 p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
-                {/* Icon Container */}
-                <div className="relative mb-6">
-                  <div
-                    className={`inline-flex p-4 rounded-2xl ${feature.bgGradient} backdrop-blur-sm group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <div
-                      className={`w-14 h-14 bg-linear-to-br ${feature.gradient} rounded-xl flex items-center justify-center shadow-lg`}
-                    >
-                      <feature.icon className="w-7 h-7 text-white" />
-                    </div>
-                  </div>
-                  {/* Animated Sparkle */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="absolute -top-2 -right-2 w-8 h-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  >
-                    <Sparkles
-                      className={`w-8 h-8 bg-linear-to-br ${feature.gradient} bg-clip-text text-transparent`}
-                    />
-                  </motion.div>
+              <div className="p-8 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gray-300 dark:hover:border-gray-700 transition-colors">
+                {/* Feature number */}
+                <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-sm font-medium">
+                  0{index + 1}
                 </div>
 
-                {/* Content */}
-                <div className="relative">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                    {feature.description}
-                  </p>
+                <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-3">
+                  {feature.title}
+                </h3>
 
-                  {/* Benefits List */}
-                  <ul className="space-y-3">
-                    {feature.benefits.map((benefit, idx) => (
-                      <motion.li
-                        key={idx}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 + idx * 0.1 }}
-                        className="flex items-center gap-3"
-                      >
-                        <div
-                          className={`w-2 h-2 rounded-full bg-linear-to-r ${feature.gradient}`}
-                        />
-                        <span className="text-gray-700 dark:text-gray-300 font-medium">
-                          {benefit}
-                        </span>
-                        <CheckCircle className="w-4 h-4 text-emerald-500 ml-auto" />
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                  {feature.description}
+                </p>
 
-                {/* Decorative Line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-gray-200 to-transparent dark:via-gray-700 group-hover:via-gray-300 dark:group-hover:via-gray-600 transition-all duration-300" />
+                <ul className="space-y-2">
+                  {feature.benefits.map((benefit, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-sm">
+                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-300">
+                        {benefit}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Platform Capabilities Section */}
+        {/* User Groups Section with Images */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-24 lg:mt-32"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-20 md:mb-32"
         >
           <div className="text-center mb-12">
-            <h3 className="text-4xl md:text-5xl font-bold tracking-tight">
-              <span className="bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-300 dark:to-white bg-clip-text text-transparent">
-                Tailored for{" "}
-              </span>
-              <span className="bg-linear-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">
-                Everyone
-              </span>
+            <h3 className="text-2xl md:text-3xl font-light text-gray-900 dark:text-white mb-2">
+              Built for <span className="font-medium">Everyone</span>
             </h3>
-            <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Custom solutions designed to meet the unique needs of every user
-              on our platform
+            <p className="text-gray-600 dark:text-gray-400">
+              Tailored solutions for every user on our platform
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {platformFeatures.map((platform, index) => (
+          <div className="grid md:grid-cols-3 gap-8">
+            {userGroups.map((group, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                className={`relative bg-linear-to-b from-white/80 to-gray-50/80 dark:from-gray-800/80 dark:to-gray-900/80 backdrop-blur-sm rounded-3xl border border-gray-200/50 dark:border-gray-700/50 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group`}
+                transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                className="group"
               >
-                {/* Background Glow */}
-                <div
-                  className={`absolute inset-0 bg-linear-to-br ${platform.gradient}/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`}
-                />
-
-                <div className="flex items-center gap-4 mb-6">
-                  <div
-                    className={`w-14 h-14 bg-linear-to-br ${platform.gradient} rounded-xl flex items-center justify-center shadow-lg`}
-                  >
-                    <platform.icon className="w-7 h-7 text-white" />
+                {/* User image placeholder */}
+                <div className="relative h-64 mb-6 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  {/* Placeholder for African buyer images */}
+                  <div className="absolute inset-0 flex items-center justify-center text-gray-400 dark:text-gray-600">
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 mx-auto mb-4" />
+                      <div className="text-sm">Modern African Buyer</div>
+                    </div>
                   </div>
-                  <h4 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {platform.title}
-                  </h4>
                 </div>
 
-                <ul className="space-y-4">
-                  {platform.items.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3 group/item">
-                      <div className="relative mt-2">
-                        <div
-                          className={`w-2 h-2 rounded-full bg-linear-to-r ${platform.gradient} group-hover/item:scale-125 transition-transform`}
-                        />
-                        <div
-                          className={`absolute inset-0 w-2 h-2 rounded-full bg-linear-to-r ${platform.gradient} blur-sm opacity-0 group-hover/item:opacity-100 transition-opacity`}
-                        />
-                      </div>
-                      <span className="text-gray-700 dark:text-gray-300 flex-1">
+                <h4 className="font-medium text-gray-900 dark:text-white mb-4">
+                  {group.title}
+                </h4>
+
+                <ul className="space-y-3">
+                  {group.items.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <ArrowRight className="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-300 text-sm">
                         {item}
                       </span>
-                      <ArrowRight className="w-4 h-4 text-gray-400 opacity-0 group-hover/item:opacity-100 transition-opacity" />
                     </li>
                   ))}
                 </ul>
@@ -360,119 +191,62 @@ export default function Features() {
           </div>
         </motion.div>
 
-        {/* Security & Trust Section */}
+        {/* Security Section */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="mt-24 lg:mt-32"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="bg-gray-50 dark:bg-gray-800/30 rounded-2xl p-8 md:p-12"
         >
-          <div className="bg-linear-to-br from-white/80 to-gray-50/80 dark:from-gray-800/30 dark:to-gray-900/30 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-emerald-500/10 to-cyan-500/10 dark:from-emerald-500/20 dark:to-cyan-500/20 border border-emerald-500/20 dark:border-emerald-500/30 mb-6">
-                  <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span className="text-sm font-medium bg-linear-to-r from-emerald-600 to-cyan-600 dark:from-emerald-400 dark:to-cyan-400 bg-clip-text text-transparent">
-                    ENTERPRISE-GRADE SECURITY
-                  </span>
-                </div>
-
-                <h3 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-                  <span className="bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-300 dark:to-white bg-clip-text text-transparent">
-                    Your Data is{" "}
-                  </span>
-                  <span className="bg-linear-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">
-                    Protected
-                  </span>
-                </h3>
-
-                <p className="text-gray-600 dark:text-gray-400 text-lg mb-8 leading-relaxed">
-                  We employ bank-level encryption, regular security audits, and
-                  compliance with global data protection standards to ensure
-                  complete peace of mind.
-                </p>
-
-                {/* Security Features Grid */}
-                <div className="grid grid-cols-2 gap-6">
-                  {securityFeatures.map((security, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 1.2 + idx * 0.1 }}
-                      className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/30 dark:border-gray-700/30"
-                    >
-                      <div className="flex items-center gap-3 mb-2">
-                        <security.icon className="w-5 h-5 text-emerald-500" />
-                        <span className="font-bold text-gray-900 dark:text-white">
-                          {security.title}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                        {security.description}
-                      </p>
-                      <div className="text-2xl font-bold bg-linear-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-                        {security.stat}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                <div className="w-1 h-1 rounded-full bg-green-500" />
+                Security & Trust
               </div>
 
-              {/* Security Score Card */}
-              <div className="relative">
-                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <div className="text-xl font-bold text-gray-900 dark:text-white">
-                        Security Score
-                      </div>
-                      <div className="text-4xl font-bold bg-linear-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">
-                        9.8/10
-                      </div>
-                    </div>
+              <h3 className="text-2xl md:text-3xl font-medium text-gray-900 dark:text-white mb-6">
+                Your Data is Protected
+              </h3>
 
-                    <div className="space-y-2">
-                      <div className="h-2.5 bg-gray-200/50 dark:bg-gray-700/50 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: "98%" }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 1.4 }}
-                          className="h-full bg-linear-to-r from-emerald-500 to-cyan-500 rounded-full"
-                        />
-                      </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
-                        Industry-leading security rating
-                      </div>
-                    </div>
+              <p className="text-gray-600 dark:text-gray-400 mb-8">
+                We employ bank-level encryption, regular security audits, and
+                compliance with global data protection standards to ensure
+                complete peace of mind.
+              </p>
 
-                    <div className="grid grid-cols-2 gap-4 pt-6 border-t border-gray-200/50 dark:border-gray-700/50">
-                      <div className="text-center p-4 bg-linear-to-br from-blue-500/5 to-cyan-500/5 dark:from-blue-500/10 dark:to-cyan-500/10 rounded-xl">
-                        <div className="text-3xl font-bold text-gray-900 dark:text-white">
-                          99.9%
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
-                          Uptime
-                        </div>
-                      </div>
-                      <div className="text-center p-4 bg-linear-to-br from-emerald-500/5 to-green-500/5 dark:from-emerald-500/10 dark:to-green-500/10 rounded-xl">
-                        <div className="text-3xl font-bold text-gray-900 dark:text-white">
-                          0
-                        </div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
-                          Data Breaches
-                        </div>
-                      </div>
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  { label: "GDPR Compliant", value: "100%" },
+                  { label: "PCI DSS Certified", value: "Tier 1" },
+                  { label: "256-bit Encryption", value: "AES-256" },
+                  { label: "Security Score", value: "9.8/10" },
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-xl"
+                  >
+                    <div className="text-2xl font-medium text-gray-900 dark:text-white mb-1">
+                      {item.value}
+                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      {item.label}
                     </div>
                   </div>
-                </div>
+                ))}
+              </div>
+            </div>
 
-                {/* Decorative Elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-linear-to-r from-blue-500 to-cyan-500 rounded-2xl rotate-12 opacity-10 blur-xl" />
-                <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-linear-to-r from-emerald-500 to-green-500 rounded-2xl -rotate-12 opacity-10 blur-xl" />
+            {/* Security visualization */}
+            <div className="relative">
+              <div className="aspect-square rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-2">
+                    99.9%
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400">Uptime</div>
+                </div>
               </div>
             </div>
           </div>
