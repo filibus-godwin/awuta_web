@@ -24,6 +24,7 @@ type Product = {
   locationId: string;
   createdAt: string;
   updatedAt: string;
+  tags: string; // This is actually a comma-separated string in the API
   author: {
     id: string;
     image?: string;
@@ -65,17 +66,23 @@ type Product = {
     latitude: number;
     longitude: number;
   };
+};
 
-  // Derived fields for the UI
+// Extended type with derived fields - using Omit to resolve tags conflict
+type ProcessedProduct = Omit<Product, "tags"> & {
   title?: string;
   price?: number;
   category?: string;
   rating?: number;
   featured?: boolean;
+  tags: string[]; // Override to array
+  brand?: string;
 };
 
 export default function ProductsClient({ products }: { products: Product[] }) {
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<ProcessedProduct[]>(
+    [],
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -84,74 +91,88 @@ export default function ProductsClient({ products }: { products: Product[] }) {
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   // Memoize the data processing function
-  const processProductData = useCallback((product: Product) => {
-    // Extract title from description (first few words)
-    const title = product.description
-      ? product.description.split(" ").slice(0, 5).join(" ") +
-        (product.description.split(" ").length > 5 ? "..." : "")
-      : "Untitled Product";
+  const processProductData = useCallback(
+    (product: Product): ProcessedProduct => {
+      // Extract title from description (first few words)
+      const title = product.description
+        ? product.description.split(" ").slice(0, 5).join(" ") +
+          (product.description.split(" ").length > 5 ? "..." : "")
+        : "Untitled Product";
 
-    // Extract price from aspects if available
-    const priceAspect = product.aspects?.find(
-      (aspect) =>
-        aspect.aspectName.toLowerCase().includes("price") ||
-        aspect.aspectName.toLowerCase().includes("cost"),
-    );
-
-    // Try to parse price from aspect value or description
-    let price = 0;
-    if (priceAspect?.aspectValue) {
-      const priceMatch = priceAspect.aspectValue.match(/(\d+(\.\d{1,2})?)/);
-      price = priceMatch ? parseFloat(priceMatch[0]) : 0;
-    } else {
-      // Fallback: try to find price in description
-      const descPriceMatch = product.description?.match(
-        /₦?\s*(\d+(\.\d{1,2})?)/,
+      // Extract price from aspects if available
+      const priceAspect = product.aspects?.find(
+        (aspect) =>
+          aspect.aspectName.toLowerCase().includes("price") ||
+          aspect.aspectName.toLowerCase().includes("cost"),
       );
-      price = descPriceMatch ? parseFloat(descPriceMatch[1]) : 0;
-    }
 
-    // Extract category from aspects
-    const categoryAspect = product.aspects?.find(
-      (aspect) =>
-        aspect.aspectName.toLowerCase().includes("category") ||
-        aspect.aspectName.toLowerCase().includes("style") ||
-        aspect.aspectName.toLowerCase().includes("type"),
-    );
+      // Try to parse price from aspect value or description
+      let price = 0;
+      if (priceAspect?.aspectValue) {
+        const priceMatch = priceAspect.aspectValue.match(/(\d+(\.\d{1,2})?)/);
+        price = priceMatch ? parseFloat(priceMatch[0]) : 0;
+      } else {
+        // Fallback: try to find price in description
+        const descPriceMatch = product.description?.match(
+          /₦?\s*(\d+(\.\d{1,2})?)/,
+        );
+        price = descPriceMatch ? parseFloat(descPriceMatch[1]) : 0;
+      }
 
-    const category = categoryAspect?.aspectValue || "Uncategorized";
+      // Extract category from aspects
+      const categoryAspect = product.aspects?.find(
+        (aspect) =>
+          aspect.aspectName.toLowerCase().includes("category") ||
+          aspect.aspectName.toLowerCase().includes("style") ||
+          aspect.aspectName.toLowerCase().includes("type"),
+      );
 
-    // Extract brand from aspects
-    const brandAspect = product.aspects?.find((aspect) =>
-      aspect.aspectName.toLowerCase().includes("brand"),
-    );
+      const category = categoryAspect?.aspectValue || "Uncategorized";
 
-    // Create tags from aspects with values
-    const tags =
-      product.aspects
-        ?.filter(
-          (aspect) => aspect.aspectValue && aspect.aspectValue.trim() !== "",
-        )
-        .map((aspect) => aspect.aspectValue)
-        .slice(0, 3) || [];
+      // Extract brand from aspects
+      const brandAspect = product.aspects?.find((aspect) =>
+        aspect.aspectName.toLowerCase().includes("brand"),
+      );
 
-    return {
-      ...product,
-      title,
-      price,
-      category,
-      tags,
-      brand: brandAspect?.aspectValue,
-      rating: 4.5, // Default rating (not in API)
-      featured: Math.random() > 0.7, // Random featured flag (not in API)
-    };
-  }, []);
+      // Parse tags from string to array
+      const tagsArray = product.tags
+        ? product.tags
+            .split(",")
+            .map((tag) => tag.trim())
+            .filter((tag) => tag)
+        : [];
+
+      // Create additional tags from aspects with values
+      const aspectTags =
+        product.aspects
+          ?.filter(
+            (aspect) => aspect.aspectValue && aspect.aspectValue.trim() !== "",
+          )
+          .map((aspect) => aspect.aspectValue)
+          .slice(0, 3) || [];
+
+      // Combine both sources of tags
+      const tags = [...tagsArray, ...aspectTags].slice(0, 5);
+
+      return {
+        ...product,
+        title,
+        price,
+        category,
+        tags,
+        brand: brandAspect?.aspectValue,
+        rating: 4.5, // Default rating (not in API)
+        featured: Math.random() > 0.7, // Random featured flag (not in API)
+      } as ProcessedProduct; // Type assertion to resolve the tags type conflict
+    },
+    [],
+  );
 
   // Process initial products once when component mounts
   useEffect(() => {
     const processedProducts = products.map(processProductData);
     setFilteredProducts(processedProducts);
-  }, [products, processProductData]); // Add processProductData to dependencies
+  }, [products, processProductData]);
 
   // Extract unique categories from ALL products, not filteredProducts
   const categories = useMemo(() => {
@@ -163,7 +184,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
     return ["all", ...Array.from(cats)];
   }, [products, processProductData]);
 
-  // Filtering and sorting logic - use products directly, not filteredProducts
+  // Filtering and sorting logic
   useEffect(() => {
     // Process all products first
     const allProcessedProducts = products.map(processProductData);
@@ -173,7 +194,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
         searchTerm === "" ||
         product.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.tags?.some((tag) =>
+        product.tags.some((tag) =>
           tag.toLowerCase().includes(searchTerm.toLowerCase()),
         );
 
@@ -194,8 +215,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
           return (b.rating || 0) - (a.rating || 0);
         case "newest":
           return (
-            new Date(b.createdAt || "").getTime() -
-            new Date(a.createdAt || "").getTime()
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           );
         default: // featured
           return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
@@ -203,22 +223,10 @@ export default function ProductsClient({ products }: { products: Product[] }) {
     });
 
     setFilteredProducts(filtered);
-  }, [products, searchTerm, selectedCategory, sortBy, processProductData]); // Remove filteredProducts from dependencies
+  }, [products, searchTerm, selectedCategory, sortBy, processProductData]);
 
   const formatPrice = (price?: number) =>
     price ? `₦${price.toLocaleString()}` : "Price on request";
-
-  const toggleFavorite = (id: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const newFavorites = new Set(favorites);
-    if (newFavorites.has(id)) {
-      newFavorites.delete(id);
-    } else {
-      newFavorites.add(id);
-    }
-    setFavorites(newFavorites);
-  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-8">
@@ -265,8 +273,9 @@ export default function ProductsClient({ products }: { products: Product[] }) {
           </div>
 
           {/* Filters Bar */}
-          {/* <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
             <div className="flex items-center gap-4">
+              {/* View Toggle */}
               <div className="flex border border-gray-200 dark:border-gray-800 rounded-lg p-1">
                 <button
                   onClick={() => setViewMode("grid")}
@@ -302,6 +311,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
                 </button>
               </div>
 
+              {/* Filter Toggle */}
               <button
                 onClick={() => setShowFilters(!showFilters)}
                 className="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
@@ -316,6 +326,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
               </button>
             </div>
 
+            {/* Sort By */}
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
@@ -327,7 +338,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
               <option value="price-high">Price: High to Low</option>
               <option value="rating">Highest Rated</option>
             </select>
-          </div> */}
+          </div>
 
           {/* Filters Panel */}
           <AnimatePresence>
@@ -387,8 +398,6 @@ export default function ProductsClient({ products }: { products: Product[] }) {
                 product.media?.[0]?.url ||
                 "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop";
 
-              const isFavorite = favorites.has(product.id);
-
               return (
                 <motion.div
                   key={product.id}
@@ -404,8 +413,12 @@ export default function ProductsClient({ products }: { products: Product[] }) {
                       <div className="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-800">
                         <img
                           src={image}
-                          alt={product.title}
+                          alt={product.title || "Product image"}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            e.currentTarget.src =
+                              "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop";
+                          }}
                         />
 
                         {/* Verified Badge - using business verification */}
@@ -445,7 +458,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
                           </p>
 
                           {/* Tags */}
-                          {product.tags && product.tags.length > 0 && (
+                          {product.tags.length > 0 && (
                             <div className="flex flex-wrap gap-1 mb-3">
                               {product.tags.map((tag, idx) => (
                                 <span
@@ -487,6 +500,10 @@ export default function ProductsClient({ products }: { products: Product[] }) {
                                 src={product.author.image}
                                 alt={product.author.name}
                                 className="w-6 h-6 rounded-full"
+                                onError={(e) => {
+                                  e.currentTarget.src =
+                                    "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop";
+                                }}
                               />
                             )}
                             <div className="flex-1 min-w-0">
