@@ -414,10 +414,28 @@ export default function ProductsClient({ products }: { products: Product[] }) {
                         <img
                           src={image}
                           alt={product.title || "Product image"}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="w-full h-full group-hover:scale-105 transition-transform duration-300"
+                          style={{
+                            objectFit: "contain",
+                            objectPosition: "center",
+                          }}
                           onError={(e) => {
                             e.currentTarget.src =
                               "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop";
+                            e.currentTarget.style.objectFit = "cover"; // Fallback image can be cropped
+                          }}
+                          onLoad={(e) => {
+                            // Optional: Detect if image is portrait and adjust
+                            const img = e.currentTarget;
+                            const isPortrait =
+                              img.naturalHeight > img.naturalWidth;
+                            if (isPortrait) {
+                              img.style.objectFit = "contain";
+                              img.style.objectPosition = "top center";
+                            } else {
+                              img.style.objectFit = "cover";
+                              img.style.objectPosition = "center center";
+                            }
                           }}
                         />
 
