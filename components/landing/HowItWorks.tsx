@@ -1,31 +1,30 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
 
 const HowItWorks = () => {
   const steps = [
     {
       number: "01",
-      title: "Vendors List Products",
+      title: "Sellers List Products",
       description:
-        "Verified vendors showcase their premium products with detailed descriptions and transparent pricing.",
+        "Verified sellers list their products with photos, descriptions, and transparent pricing.",
       color: "border-blue-400",
       bg: "bg-blue-400/10",
     },
     {
       number: "02",
-      title: "Buyers Discover & Explore",
+      title: "Buyers Browse & Discover",
       description:
-        "Find exactly what you need with intelligent search and personalized recommendations.",
+        "Find what you need by browsing listings or searching for specific products.",
       color: "border-purple-400",
       bg: "bg-purple-400/10",
     },
     {
       number: "03",
-      title: "Secure Purchase",
+      title: "Pay Securely",
       description:
-        "Complete seamless transactions with secure payments and real-time order tracking.",
+        "Complete your purchase through Paystack with secure payment processing.",
       color: "border-emerald-400",
       bg: "bg-emerald-400/10",
     },
@@ -33,47 +32,31 @@ const HowItWorks = () => {
 
   const features = [
     {
-      title: "Verified Vendors",
-      description: "Rigorous verification ensures quality and trust",
-      highlight: "99.8% satisfaction",
+      title: "Verified Sellers",
+      description: "Sellers are verified through BVN validation before they can sell",
     },
     {
       title: "Secure Payments",
-      description: "Bank-level encryption protects all transactions",
-      highlight: "SSL encrypted",
+      description: "All payments are processed securely through Paystack",
     },
     {
-      title: "Quality Assurance",
-      description: "Every product undergoes thorough quality checks",
-      highlight: "100% inspected",
+      title: "Transparent Pricing",
+      description: "Product prices are listed upfront with no hidden fees",
     },
     {
-      title: "Community Trust",
-      description: "Join thousands of verified marketplace members",
-      highlight: "50k+ members",
+      title: "Mobile App",
+      description: "Available on iOS and Android for shopping on the go",
     },
   ];
 
   return (
     <section
       id="how-it-works"
-      className="relative py-20 md:py-32 bg-white dark:bg-[rgb(0,25,0)] overflow-hidden"
+      className="relative py-20 md:py-32 bg-white dark:bg-[rgb(0,25,0)]"
     >
-      {/* Subtle background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent dark:via-gray-800" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent dark:via-gray-800" />
-      </div>
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16 md:mb-24"
-        >
+        <div className="text-center mb-16 md:mb-24">
           <div className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4 tracking-widest uppercase">
             <div className="w-1 h-1 rounded-full bg-[rgb(91,199,97)]" />
             Process
@@ -85,10 +68,9 @@ const HowItWorks = () => {
           </h2>
 
           <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
-            A streamlined three-step process designed for security and
-            efficiency.
+            A simple three-step process from listing to purchase.
           </p>
-        </motion.div>
+        </div>
 
         {/* Steps */}
         <div className="relative">
@@ -97,14 +79,7 @@ const HowItWorks = () => {
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {steps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative"
-              >
+              <div key={step.number} className="relative">
                 {/* Step indicator */}
                 <div className="flex items-center justify-center mb-8">
                   <div
@@ -128,35 +103,22 @@ const HowItWorks = () => {
                     {step.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
         {/* Features Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-20 md:mt-32"
-        >
+        <div className="mt-20 md:mt-32">
           <div className="text-center mb-12">
             <h3 className="text-2xl md:text-3xl font-light text-gray-900 dark:text-white">
-              Built on <span className="font-medium">Trust</span>
+              What We <span className="font-medium">Offer</span>
             </h3>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="relative group"
-              >
+            {features.map((feature) => (
+              <div key={feature.title} className="relative group">
                 <div className="p-6 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gray-300 dark:hover:border-gray-700 transition-colors">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-[rgb(91,199,97)] mt-1 flex-shrink-0" />
@@ -164,33 +126,16 @@ const HowItWorks = () => {
                       <h4 className="font-medium text-gray-900 dark:text-white mb-2">
                         {feature.title}
                       </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
                         {feature.description}
                       </p>
-                      <div className="text-xs font-medium text-[rgb(91,199,97)] dark:text-[rgb(91,199,97)]">
-                        {feature.highlight}
-                      </div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
-
-        {/* Call to action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-16 md:mt-24 text-center"
-        >
-          <div className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-            Ready to get started?
-            <ArrowRight className="w-4 h-4" />
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
