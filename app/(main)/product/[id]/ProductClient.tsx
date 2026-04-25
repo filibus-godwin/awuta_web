@@ -85,12 +85,12 @@ export default function ProductClient({ product }: { product: Post }) {
     ) || [];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[rgb(0,25,0)] py-8">
+    <div className="min-h-screen bg-white py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Navigation */}
         <Link
           href="/products"
-          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-8 group"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Products
@@ -100,7 +100,7 @@ export default function ProductClient({ product }: { product: Post }) {
           {/* Left Column - Images */}
           <div className="space-y-6">
             {/* Main Image */}
-            <div className="relative border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden aspect-square bg-gray-100 dark:bg-gray-800">
+            <div className="relative border border-gray-200 rounded-xl overflow-hidden aspect-square bg-gray-100">
               {images.length > 0 ? (
                 <img
                   src={getImageSrc(selectedImage) || ""}
@@ -123,7 +123,7 @@ export default function ProductClient({ product }: { product: Post }) {
                         (prev) => (prev - 1 + images.length) % images.length,
                       )
                     }
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center justify-center"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
@@ -131,7 +131,7 @@ export default function ProductClient({ product }: { product: Post }) {
                     onClick={() =>
                       setSelectedImage((prev) => (prev + 1) % images.length)
                     }
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center justify-center"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center"
                   >
                     <ChevronRight className="w-4 h-4" />
                   </button>
@@ -140,7 +140,7 @@ export default function ProductClient({ product }: { product: Post }) {
 
               {/* Verified Badge */}
               {product.author?.business && (
-                <div className="absolute bottom-4 left-4 flex items-center gap-1 px-3 py-1.5 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg">
+                <div className="absolute bottom-4 left-4 flex items-center gap-1 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-lg">
                   <CheckCircle className="w-3 h-3 text-green-500" />
                   <span className="text-xs font-medium">
                     {product.author.business.name}
@@ -159,7 +159,7 @@ export default function ProductClient({ product }: { product: Post }) {
                     className={`shrink-0 w-16 h-16 rounded-lg overflow-hidden border ${
                       selectedImage === i
                         ? "border-[rgb(91,199,97)]"
-                        : "border-gray-200 dark:border-gray-800"
+                        : "border-gray-200"
                     }`}
                   >
                     <img
@@ -177,13 +177,13 @@ export default function ProductClient({ product }: { product: Post }) {
           {/* Right Column - Product Info */}
           <div className="space-y-6">
             {/* Title */}
-            <h1 className="text-2xl md:text-3xl font-medium text-gray-900 dark:text-white">
+            <h1 className="text-2xl md:text-3xl font-medium text-gray-900">
               {title}
             </h1>
 
             {/* Price */}
             <div className="space-y-1">
-              <div className="text-3xl font-medium text-gray-900 dark:text-white">
+              <div className="text-3xl font-medium text-gray-900">
                 {formatPrice(product.price)}
               </div>
               <div className="flex items-center gap-3">
@@ -193,12 +193,12 @@ export default function ProductClient({ product }: { product: Post }) {
                   </span>
                 )}
                 {product.price?.onSale && product.price.discountLevel > 0 && (
-                  <span className="px-2 py-0.5 text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded">
+                  <span className="px-2 py-0.5 text-xs bg-red-100 text-red-700 rounded">
                     {product.price.discountLevel}% off
                   </span>
                 )}
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="text-sm text-gray-500">
                 Listed on {formatDate(product.createdAt)}
               </div>
             </div>
@@ -206,16 +206,16 @@ export default function ProductClient({ product }: { product: Post }) {
             {/* Price Tiers */}
             {product.priceTiers && product.priceTiers.length > 1 && (
               <div>
-                <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                <h3 className="text-sm font-medium text-gray-900 mb-2">
                   Bulk Pricing
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {product.priceTiers.map((tier) => (
                     <div
                       key={tier.id}
-                      className="px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-lg text-sm"
+                      className="px-3 py-2 border border-gray-200 rounded-lg text-sm"
                     >
-                      <div className="font-medium text-gray-900 dark:text-white">
+                      <div className="font-medium text-gray-900">
                         {"\u20A6"}
                         {tier.price.toLocaleString()}
                       </div>
@@ -232,11 +232,11 @@ export default function ProductClient({ product }: { product: Post }) {
             {/* Description */}
             {product.description && (
               <div>
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
                   Description
                 </h3>
                 <div
-                  className={`text-gray-600 dark:text-gray-400 leading-relaxed whitespace-pre-line ${
+                  className={`text-gray-600 leading-relaxed whitespace-pre-line ${
                     showFullDescription ? "" : "line-clamp-4"
                   }`}
                 >
@@ -256,21 +256,21 @@ export default function ProductClient({ product }: { product: Post }) {
             {/* Aspects/Details */}
             {displayAspects.length > 0 && (
               <div>
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-3">
+                <h3 className="text-lg font-medium text-gray-900 mb-3">
                   Details
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {displayAspects.map((aspect, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-2 p-3 border border-gray-200 dark:border-gray-800 rounded-lg"
+                      className="flex items-center gap-2 p-3 border border-gray-200 rounded-lg"
                     >
-                      <Tag className="w-4 h-4 text-gray-500 dark:text-gray-400 flex-shrink-0" />
+                      <Tag className="w-4 h-4 text-gray-500 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                        <div className="text-xs text-gray-500 truncate">
                           {aspect.aspectName}
                         </div>
-                        <div className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                        <div className="text-sm font-medium text-gray-900 truncate">
                           {String(aspect.aspectValue)}
                         </div>
                       </div>
@@ -282,13 +282,13 @@ export default function ProductClient({ product }: { product: Post }) {
 
             {/* Availability */}
             {product.availability && (
-              <div className="flex items-center gap-2 p-3 border border-gray-200 dark:border-gray-800 rounded-lg">
-                <Package className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+              <div className="flex items-center gap-2 p-3 border border-gray-200 rounded-lg">
+                <Package className="w-4 h-4 text-gray-500" />
                 <div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                  <div className="text-xs text-gray-500">
                     Availability
                   </div>
-                  <div className="text-sm font-medium text-gray-900 dark:text-white capitalize">
+                  <div className="text-sm font-medium text-gray-900 capitalize">
                     {product.availability.replace(/_/g, " ")}
                   </div>
                 </div>
@@ -297,14 +297,14 @@ export default function ProductClient({ product }: { product: Post }) {
 
             {/* Location */}
             {locationStr && (
-              <div className="p-4 border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="p-4 border border-gray-200 rounded-lg">
                 <div className="flex items-center gap-2 mb-1">
-                  <MapPin className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                  <h4 className="font-medium text-gray-900 dark:text-white">
+                  <MapPin className="w-4 h-4 text-gray-500" />
+                  <h4 className="font-medium text-gray-900">
                     Location
                   </h4>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm text-gray-600">
                   {product.location?.formattedAddress ||
                     product.location?.displayName ||
                     locationStr}
@@ -317,14 +317,14 @@ export default function ProductClient({ product }: { product: Post }) {
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowShareModal(true)}
-                  className="flex-1 py-3 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors font-medium flex items-center justify-center gap-2"
+                  className="flex-1 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium flex items-center justify-center gap-2"
                 >
                   <Share2 className="w-4 h-4" />
                   Share
                 </button>
                 <button
                   onClick={() => setIsFavorite(!isFavorite)}
-                  className="flex-1 py-3 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors font-medium flex items-center justify-center gap-2"
+                  className="flex-1 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium flex items-center justify-center gap-2"
                 >
                   <Heart
                     className={`w-4 h-4 ${isFavorite ? "fill-red-500 text-red-500" : ""}`}
@@ -336,8 +336,8 @@ export default function ProductClient({ product }: { product: Post }) {
 
             {/* Seller Information */}
             {product.author && (
-              <div className="border-t border-gray-200 dark:border-gray-800 pt-6">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+              <div className="border-t border-gray-200 pt-6">
+                <h3 className="text-lg font-medium text-gray-900 mb-4">
                   Seller
                 </h3>
 
@@ -350,26 +350,26 @@ export default function ProductClient({ product }: { product: Post }) {
                         className="w-14 h-14 rounded-lg object-cover"
                       />
                     ) : (
-                      <div className="w-14 h-14 rounded-lg bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 text-lg font-medium">
+                      <div className="w-14 h-14 rounded-lg bg-gray-200 flex items-center justify-center text-gray-500 text-lg font-medium">
                         {product.author.name.charAt(0)}
                       </div>
                     )}
                   </div>
 
                   <div className="flex-1">
-                    <h4 className="font-medium text-gray-900 dark:text-white">
+                    <h4 className="font-medium text-gray-900">
                       {product.author.name}
                     </h4>
                     {product.author.business && (
                       <div className="flex items-center gap-1 mt-1">
                         <Building className="w-3 h-3 text-gray-400" />
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                        <span className="text-sm text-gray-600">
                           {product.author.business.name}
                         </span>
                       </div>
                     )}
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="text-xs text-gray-500 dark:text-gray-500">
+                      <span className="text-xs text-gray-500">
                         {product.author.postCount} listings
                       </span>
                     </div>
@@ -381,7 +381,7 @@ export default function ProductClient({ product }: { product: Post }) {
                           href={`https://wa.me/${product.author.links.whatsapp}?text=${encodeURIComponent(`Hi, I'm interested in: ${title}`)}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors inline-flex items-center gap-1"
+                          className="px-3 py-1.5 border border-gray-300 rounded text-sm hover:bg-gray-50 transition-colors inline-flex items-center gap-1"
                         >
                           <FaWhatsapp className="w-3 h-3" />
                           WhatsApp
@@ -389,7 +389,7 @@ export default function ProductClient({ product }: { product: Post }) {
                       )}
                       <Link
                         href={`/seller/${product.author.id}`}
-                        className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                        className="px-3 py-1.5 border border-gray-300 rounded text-sm hover:bg-gray-50 transition-colors"
                       >
                         View Profile
                       </Link>
@@ -402,15 +402,15 @@ export default function ProductClient({ product }: { product: Post }) {
         </div>
 
         {/* Additional Information */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+        <div className="mt-12 pt-8 border-t border-gray-200">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <h4 className="font-medium text-gray-900 dark:text-white">
+              <h4 className="font-medium text-gray-900">
                 Product Info
               </h4>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-gray-600">
                     Listed
                   </span>
                   <span className="font-medium">
@@ -418,7 +418,7 @@ export default function ProductClient({ product }: { product: Post }) {
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-gray-600">
                     Last Updated
                   </span>
                   <span className="font-medium">
@@ -426,7 +426,7 @@ export default function ProductClient({ product }: { product: Post }) {
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-gray-600">
                     Product ID
                   </span>
                   <span className="font-mono text-sm">
@@ -439,13 +439,13 @@ export default function ProductClient({ product }: { product: Post }) {
             {/* Location Details */}
             {product.location && (
               <div className="space-y-4">
-                <h4 className="font-medium text-gray-900 dark:text-white">
+                <h4 className="font-medium text-gray-900">
                   Location
                 </h4>
                 <div className="space-y-3">
                   {product.location.formattedAddress && (
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">
+                      <span className="text-gray-600">
                         Address
                       </span>
                       <span className="font-medium text-right max-w-[60%]">
@@ -455,7 +455,7 @@ export default function ProductClient({ product }: { product: Post }) {
                   )}
                   {product.location.locality && (
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">
+                      <span className="text-gray-600">
                         City
                       </span>
                       <span className="font-medium">
@@ -465,7 +465,7 @@ export default function ProductClient({ product }: { product: Post }) {
                   )}
                   {product.location.country && (
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">
+                      <span className="text-gray-600">
                         Country
                       </span>
                       <span className="font-medium">
@@ -494,16 +494,16 @@ export default function ProductClient({ product }: { product: Post }) {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white dark:bg-gray-900 rounded-xl p-6 w-full max-w-md border border-gray-200 dark:border-gray-800"
+              className="bg-white rounded-xl p-6 w-full max-w-md border border-gray-200"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                <h3 className="text-lg font-medium text-gray-900">
                   Share Product
                 </h3>
                 <button
                   onClick={() => setShowShareModal(false)}
-                  className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
+                  className="p-1 hover:bg-gray-100 rounded"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -532,21 +532,21 @@ export default function ProductClient({ product }: { product: Post }) {
                     href={shareLinks.twitter}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gray-900 dark:bg-white rounded-lg p-4 text-center text-white dark:text-gray-900 hover:opacity-90 transition-opacity"
+                    className="bg-gray-900 rounded-lg p-4 text-center text-white hover:opacity-90 transition-opacity"
                   >
                     <div className="text-xs font-medium mt-2">Twitter</div>
                   </a>
                 </div>
 
                 {/* Copy Link */}
-                <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
+                <div className="pt-4 border-t border-gray-200">
                   <div className="flex gap-2">
-                    <div className="flex-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm text-gray-600 dark:text-gray-400 truncate">
+                    <div className="flex-1 bg-gray-100 rounded-lg p-3 text-sm text-gray-600 truncate">
                       {productUrl}
                     </div>
                     <button
                       onClick={copyToClipboard}
-                      className="px-4 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:opacity-90 transition-opacity font-medium"
+                      className="px-4 py-3 bg-gray-900 text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
                     >
                       {copied ? "Copied!" : "Copy"}
                     </button>

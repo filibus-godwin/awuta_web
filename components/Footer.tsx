@@ -24,17 +24,17 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-800 mt-16 bg-gray-50 dark:bg-[rgb(0,25,0)]">
+    <footer className="border-t border-gray-200 mt-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
           {/* Left Column - Brand & Contact */}
           <div className="space-y-6">
             <div>
-              <div className="text-2xl font-medium text-gray-900 dark:text-white mb-3">
+              <div className="text-2xl font-medium text-gray-900 mb-3">
                 Awuta
               </div>
-              <p className="text-gray-600 dark:text-gray-400 max-w-sm">
+              <p className="text-gray-600 max-w-sm">
                 A marketplace for buying and selling products in Nigeria with
                 verified sellers and secure payments.
               </p>
@@ -48,7 +48,7 @@ export default function Footer() {
                   href={contact.href}
                   target={contact.target}
                   rel={contact.target ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                  className="flex items-center gap-3 text-sm text-gray-600 hover:text-gray-900 transition-colors"
                 >
                   <contact.icon className="w-4 h-4" />
                   <span>{contact.text}</span>
@@ -59,7 +59,7 @@ export default function Footer() {
 
           {/* Right Column - Links */}
           <div>
-            <h4 className="font-medium text-gray-900 dark:text-white mb-4">
+            <h4 className="font-medium text-gray-900 mb-4">
               Links
             </h4>
             <ul className="space-y-3">
@@ -67,7 +67,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -78,11 +78,11 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gray-200 dark:bg-gray-800 my-8" />
+        <div className="h-px bg-gray-200 my-8" />
 
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
+          <div className="text-sm text-gray-500 text-center sm:text-left">
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
               <span>&copy; {currentYear} Awuta. All rights reserved.</span>
               <span className="hidden sm:inline">&bull;</span>
@@ -92,7 +92,7 @@ export default function Footer() {
                 Nigeria
               </span>
             </div>
-            <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
+            <p className="mt-2 text-xs text-gray-400">
               Awuta is a product of Defsignal
             </p>
           </div>
@@ -102,10 +102,10 @@ export default function Footer() {
       {/* Back to Top */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-6 right-6 w-12 h-12 bg-white dark:bg-[rgb(91,199,97)] rounded-full shadow-lg border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-50"
+        className="fixed bottom-6 right-6 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-300 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-50"
         aria-label="Back to top"
       >
-        <ArrowUp className="w-5 h-5 text-gray-700 dark:text-[rgb(13,41,23)]" />
+        <ArrowUp className="w-5 h-5 text-gray-700" />
       </button>
     </footer>
   );

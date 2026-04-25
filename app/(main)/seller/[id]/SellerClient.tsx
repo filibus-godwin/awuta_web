@@ -134,13 +134,13 @@ export default function SellerClient({
   }, [seller.links]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[rgb(0,25,0)] py-8">
+    <div className="min-h-screen bg-white py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Navigation */}
         <div className="flex items-center justify-between mb-8">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white group"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Back to Products
@@ -148,7 +148,7 @@ export default function SellerClient({
 
           <button
             onClick={() => setShowShareModal(true)}
-            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900"
           >
             <Share2 className="w-4 h-4" />
             Share
@@ -156,7 +156,7 @@ export default function SellerClient({
         </div>
 
         {/* Seller Header */}
-        <div className="border border-gray-200 dark:border-gray-800 rounded-xl p-6 mb-8">
+        <div className="border border-gray-200 rounded-xl p-6 mb-8">
           <div className="flex flex-col lg:flex-row gap-6 items-start">
             {/* Seller Avatar */}
             <div className="relative">
@@ -167,7 +167,7 @@ export default function SellerClient({
                   className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg object-cover"
                 />
               ) : (
-                <div className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 text-3xl font-medium">
+                <div className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg bg-gray-200 flex items-center justify-center text-gray-500 text-3xl font-medium">
                   {seller.name.charAt(0)}
                 </div>
               )}
@@ -182,11 +182,11 @@ export default function SellerClient({
             <div className="flex-1">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
                 <div>
-                  <h1 className="text-2xl md:text-3xl font-medium text-gray-900 dark:text-white mb-1">
+                  <h1 className="text-2xl md:text-3xl font-medium text-gray-900 mb-1">
                     {sellerName}
                   </h1>
                   {seller.business && seller.business.name !== seller.name && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-gray-500">
                       by {seller.name}
                     </p>
                   )}
@@ -207,7 +207,7 @@ export default function SellerClient({
                   )}
                   <button
                     onClick={() => setShowShareModal(true)}
-                    className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors text-sm font-medium flex items-center gap-2"
+                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium flex items-center gap-2"
                   >
                     <Share2 className="w-4 h-4" />
                     Share
@@ -216,7 +216,7 @@ export default function SellerClient({
               </div>
 
               {seller.business?.description && (
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4 whitespace-pre-line">
+                <p className="text-gray-600 leading-relaxed mb-4 whitespace-pre-line">
                   {seller.business.description}
                 </p>
               )}
@@ -230,7 +230,7 @@ export default function SellerClient({
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-[rgb(91,199,97)] transition-colors"
+                      className="flex items-center gap-2 text-gray-600 hover:text-[rgb(91,199,97)] transition-colors"
                     >
                       <link.icon className="w-4 h-4" />
                       <span className="text-sm">{link.platform}</span>
@@ -241,31 +241,31 @@ export default function SellerClient({
 
               {/* Seller Details */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <div className="border border-gray-200 dark:border-gray-800 rounded-lg p-3">
-                  <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-1">
+                <div className="border border-gray-200 rounded-lg p-3">
+                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-1">
                     <Package className="w-3 h-3" />
                     Listings
                   </div>
-                  <div className="font-medium text-gray-900 dark:text-white">
+                  <div className="font-medium text-gray-900">
                     {seller.listingCount}
                   </div>
                 </div>
-                <div className="border border-gray-200 dark:border-gray-800 rounded-lg p-3">
-                  <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-1">
+                <div className="border border-gray-200 rounded-lg p-3">
+                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-1">
                     <CheckCircle className="w-3 h-3" />
                     Account Type
                   </div>
-                  <div className="font-medium text-gray-900 dark:text-white">
+                  <div className="font-medium text-gray-900">
                     {seller.business ? "Business" : "Personal"}
                   </div>
                 </div>
                 {seller.business && seller.business.hypeCount > 0 && (
-                  <div className="border border-gray-200 dark:border-gray-800 rounded-lg p-3">
-                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-1">
+                  <div className="border border-gray-200 rounded-lg p-3">
+                    <div className="flex items-center gap-2 text-sm text-gray-500 mb-1">
                       <Calendar className="w-3 h-3" />
                       Hypes
                     </div>
-                    <div className="font-medium text-gray-900 dark:text-white">
+                    <div className="font-medium text-gray-900">
                       {seller.business.hypeCount}
                     </div>
                   </div>
@@ -278,10 +278,10 @@ export default function SellerClient({
         {/* Products Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
-            <h2 className="text-xl font-medium text-gray-900 dark:text-white mb-1">
+            <h2 className="text-xl font-medium text-gray-900 mb-1">
               Products
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
+            <p className="text-gray-600 text-sm">
               {products.length} products available
             </p>
           </div>
@@ -294,28 +294,28 @@ export default function SellerClient({
                   setSortBy(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-transparent text-sm focus:outline-none"
+                className="px-3 py-2 border border-gray-300 rounded-lg bg-transparent text-sm focus:outline-none"
               >
                 <option value="newest">Newest</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
               </select>
 
-              <div className="flex border border-gray-300 dark:border-gray-700 rounded-lg p-1">
+              <div className="flex border border-gray-300 rounded-lg p-1">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-1.5 rounded transition-colors ${viewMode === "grid" ? "bg-gray-100 dark:bg-gray-800" : ""}`}
+                  className={`p-1.5 rounded transition-colors ${viewMode === "grid" ? "bg-gray-100" : ""}`}
                 >
                   <Grid
-                    className={`w-4 h-4 ${viewMode === "grid" ? "text-gray-900 dark:text-white" : "text-gray-400"}`}
+                    className={`w-4 h-4 ${viewMode === "grid" ? "text-gray-900" : "text-gray-400"}`}
                   />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`p-1.5 rounded transition-colors ${viewMode === "list" ? "bg-gray-100 dark:bg-gray-800" : ""}`}
+                  className={`p-1.5 rounded transition-colors ${viewMode === "list" ? "bg-gray-100" : ""}`}
                 >
                   <List
-                    className={`w-4 h-4 ${viewMode === "list" ? "text-gray-900 dark:text-white" : "text-gray-400"}`}
+                    className={`w-4 h-4 ${viewMode === "list" ? "text-gray-900" : "text-gray-400"}`}
                   />
                 </button>
               </div>
@@ -333,14 +333,14 @@ export default function SellerClient({
 
                 return (
                   <Link key={product.id} href={`/product/${product.id}`}>
-                    <div className="group border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden hover:border-gray-300 dark:hover:border-gray-700 transition-colors h-full flex flex-col">
+                    <div className="group border border-gray-200 rounded-lg overflow-hidden hover:border-gray-300 transition-colors h-full flex flex-col">
                       {/* Image */}
-                      <div className="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-800">
+                      <div className="relative aspect-square overflow-hidden bg-gray-100">
                         {image ? (
                           <img
                             src={image}
                             alt={title}
-                            className="w-full h-full object-contain bg-white dark:bg-gray-800 group-hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-contain bg-white group-hover:scale-105 transition-transform duration-300"
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -356,13 +356,13 @@ export default function SellerClient({
 
                       {/* Content */}
                       <div className="p-4 flex-1 flex flex-col">
-                        <h3 className="font-medium text-gray-900 dark:text-white line-clamp-2 mb-2">
+                        <h3 className="font-medium text-gray-900 line-clamp-2 mb-2">
                           {title}
                         </h3>
 
                         {product.description &&
                           product.description !== title && (
-                            <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">
+                            <p className="text-sm text-gray-600 line-clamp-2 mb-3">
                               {product.description}
                             </p>
                           )}
@@ -370,7 +370,7 @@ export default function SellerClient({
                         <div className="mt-auto">
                           <div className="flex items-center justify-between">
                             <div>
-                              <div className="text-lg font-medium text-gray-900 dark:text-white">
+                              <div className="text-lg font-medium text-gray-900">
                                 {formatPrice(product.price)}
                               </div>
                               {product.price?.negotiable && (
@@ -385,7 +385,7 @@ export default function SellerClient({
                             </span>
                           </div>
                           {product.location && (
-                            <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 mt-2">
+                            <div className="flex items-center gap-1 text-xs text-gray-500 mt-2">
                               <MapPin className="w-3 h-3" />
                               {product.location.locality ||
                                 product.location.country}
@@ -407,7 +407,7 @@ export default function SellerClient({
                     setCurrentPage((prev) => Math.max(prev - 1, 1))
                   }
                   disabled={currentPage === 1}
-                  className="p-2 rounded border border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                  className="p-2 rounded border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
@@ -431,7 +431,7 @@ export default function SellerClient({
                       className={`w-8 h-8 rounded text-sm font-medium transition-colors ${
                         currentPage === pageNum
                           ? "bg-[rgb(91,199,97)] text-white"
-                          : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                          : "hover:bg-gray-100"
                       }`}
                     >
                       {pageNum}
@@ -444,7 +444,7 @@ export default function SellerClient({
                     setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                   }
                   disabled={currentPage === totalPages}
-                  className="p-2 rounded border border-gray-300 dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                  className="p-2 rounded border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -454,13 +454,13 @@ export default function SellerClient({
         ) : (
           /* Empty State */
           <div className="text-center py-16">
-            <div className="w-16 h-16 mx-auto bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4">
-              <Package className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+            <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
+              <Package className="w-8 h-8 text-gray-400" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
               No products yet
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600">
               {sellerName} hasn&apos;t listed any products yet.
             </p>
           </div>
@@ -481,16 +481,16 @@ export default function SellerClient({
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white dark:bg-gray-900 rounded-xl p-6 w-full max-w-md border border-gray-200 dark:border-gray-800"
+              className="bg-white rounded-xl p-6 w-full max-w-md border border-gray-200"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                <h3 className="text-lg font-medium text-gray-900">
                   Share {sellerName}
                 </h3>
                 <button
                   onClick={() => setShowShareModal(false)}
-                  className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
+                  className="p-1 hover:bg-gray-100 rounded"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -520,21 +520,21 @@ export default function SellerClient({
                     href={shareLinks.twitter}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gray-900 dark:bg-white rounded-lg p-4 text-center text-white dark:text-gray-900 hover:opacity-90 transition-opacity"
+                    className="bg-gray-900 rounded-lg p-4 text-center text-white hover:opacity-90 transition-opacity"
                   >
                     <FaTwitter className="w-6 h-6 mx-auto mb-2" />
                     <div className="text-xs font-medium">Twitter</div>
                   </a>
                 </div>
 
-                <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
+                <div className="pt-4 border-t border-gray-200">
                   <div className="flex gap-2">
-                    <div className="flex-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm text-gray-600 dark:text-gray-400 truncate">
+                    <div className="flex-1 bg-gray-100 rounded-lg p-3 text-sm text-gray-600 truncate">
                       {sellerUrl}
                     </div>
                     <button
                       onClick={copyToClipboard}
-                      className="px-4 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:opacity-90 transition-opacity font-medium flex items-center gap-2"
+                      className="px-4 py-3 bg-gray-900 text-white rounded-lg hover:opacity-90 transition-opacity font-medium flex items-center gap-2"
                     >
                       {copied ? (
                         <>
