@@ -18,11 +18,36 @@ import {
 export default function ComingSoon() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
+    if (!email.trim()) return;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch(
+        "https://cautious-winner-996579932548.europe-west1.run.app/api/waitlist/subscribe",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email.trim() }),
+        },
+      );
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.detail || "Something went wrong. Please try again.");
+      }
+
       setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -112,13 +137,15 @@ export default function ComingSoon() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[rgb(91,199,97)] focus:ring-1 focus:ring-[rgb(91,199,97)] transition-colors"
+                disabled={loading}
+                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[rgb(91,199,97)] focus:ring-1 focus:ring-[rgb(91,199,97)] transition-colors disabled:opacity-50"
               />
               <button
                 type="submit"
-                className="px-6 py-3 rounded-lg bg-[rgb(91,199,97)] text-white font-medium hover:bg-[rgb(75,170,80)] transition-colors whitespace-nowrap"
+                disabled={loading}
+                className="px-6 py-3 rounded-lg bg-[rgb(91,199,97)] text-white font-medium hover:bg-[rgb(75,170,80)] transition-colors whitespace-nowrap disabled:opacity-50"
               >
-                Join Waitlist
+                {loading ? "Joining..." : "Join Waitlist"}
               </button>
             </form>
           ) : (
@@ -127,6 +154,9 @@ export default function ComingSoon() {
                 Thank you! We'll notify you when we launch.
               </p>
             </div>
+          )}
+          {error && (
+            <p className="text-sm text-red-600 text-center mt-2">{error}</p>
           )}
           <p className="text-xs text-gray-500 text-center mt-3">
             Be the first to know when Awuta launches. No spam.
