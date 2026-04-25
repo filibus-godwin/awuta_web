@@ -1,13 +1,5 @@
-import Hero from "@/components/landing/Hero";
-import HowItWorks from "@/components/landing/HowItWorks";
+import ComingSoon from "@/components/landing/ComingSoon";
 
 export default function Home() {
-  return (
-    <>
-      <main className="flex flex-col">
-        <Hero />
-        <HowItWorks />
-      </main>
-    </>
-  );
+  return <ComingSoon />;
 }

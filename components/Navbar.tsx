@@ -4,17 +4,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  Apple,
   Menu,
   X,
   ShoppingBag,
-  Shield,
-  Sparkles,
   ChevronRight,
   Moon,
   Sun,
 } from "lucide-react";
-import { FaGooglePlay } from "react-icons/fa";
 import Image from "next/image";
 
 export default function Navbar() {
@@ -53,8 +49,6 @@ export default function Navbar() {
 
   const navItems = [
     { label: "Products", href: "/products", icon: ShoppingBag },
-    { label: "Privacy Policy", href: "/privacy", icon: Shield },
-    { label: "Terms", href: "/terms", icon: Sparkles },
   ];
 
   return (
@@ -109,14 +103,6 @@ export default function Navbar() {
             )}
           </button>
 
-          {/* Download Button - Desktop */}
-          <div className="hidden lg:block">
-            <button className="px-5 py-2.5 rounded-full bg-[rgb(91,199,97)] text-white font-medium text-sm hover:bg-[rgb(75,170,80)] transition-colors flex items-center gap-2">
-              <Apple className="w-4 h-4" />
-              Download App
-            </button>
-          </div>
-
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setOpen(!open)}
@@ -152,29 +138,6 @@ export default function Navbar() {
                   <ChevronRight className="w-4 h-4 ml-auto text-gray-400" />
                 </Link>
               ))}
-
-              {/* Mobile App Downloads */}
-              <div className="pt-6 mt-6 border-t border-gray-200 dark:border-gray-800">
-                <div className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-4 px-4">
-                  Download Our App
-                </div>
-                <div className="grid grid-cols-2 gap-3 px-4">
-                  <button className="p-4 rounded-xl bg-gray-900 text-white flex items-center gap-3">
-                    <Apple className="w-6 h-6" />
-                    <div className="text-left">
-                      <div className="text-xs opacity-80">Download on</div>
-                      <div className="font-semibold">App Store</div>
-                    </div>
-                  </button>
-                  <button className="p-4 rounded-xl border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white flex items-center gap-3">
-                    <FaGooglePlay className="w-6 h-6" />
-                    <div className="text-left">
-                      <div className="text-xs opacity-80">Get it on</div>
-                      <div className="font-semibold">Play Store</div>
-                    </div>
-                  </button>
-                </div>
-              </div>
             </div>
           </motion.div>
         )}
