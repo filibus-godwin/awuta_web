@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
   const markdown = fs.readFileSync(filePath, "utf8");
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[rgb(0,25,0)] py-8">
+    <main className="min-h-screen bg-background py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">

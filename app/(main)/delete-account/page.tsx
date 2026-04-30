@@ -110,7 +110,7 @@ export default function DeleteAccountPage() {
 
   if (step === "submitted") {
     return (
-      <main className="min-h-screen bg-white dark:bg-[rgb(0,25,0)] py-8">
+      <main className="min-h-screen bg-background py-8">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <Link
@@ -149,7 +149,7 @@ export default function DeleteAccountPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[rgb(0,25,0)] py-8">
+    <main className="min-h-screen bg-background py-8">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <Link
