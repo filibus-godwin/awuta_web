@@ -10,6 +10,7 @@ export default function Footer() {
     { label: "Products", href: "/products" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Use", href: "/terms" },
+    { label: "Delete Account", href: "/delete-account" },
   ];
 
   const contactInfo = [
