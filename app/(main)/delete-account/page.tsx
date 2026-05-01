@@ -12,8 +12,7 @@ import {
   KeyRound,
 } from "lucide-react";
 
-const API_BASE =
-  "https://cautious-winner-996579932548.europe-west1.run.app/api/auth";
+const API_BASE = "https://api.awuta.com/api/auth";
 
 type Step = "form" | "verify" | "submitted";
 

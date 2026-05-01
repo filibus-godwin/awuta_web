@@ -30,7 +30,7 @@ export default function ComingSoon() {
 
     try {
       const res = await fetch(
-        "https://cautious-winner-996579932548.europe-west1.run.app/api/waitlist/subscribe",
+        "https://api.awuta.com/api/waitlist/subscribe",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

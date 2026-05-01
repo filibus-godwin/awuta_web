@@ -129,8 +129,7 @@ export type PublicUser = {
 };
 
 // API base URL
-export const API_BASE =
-  "https://cautious-winner-996579932548.europe-west1.run.app";
+export const API_BASE = "https://api.awuta.com";
 
 // Helper to format price
 export function formatPrice(price: Post["price"]): string {
