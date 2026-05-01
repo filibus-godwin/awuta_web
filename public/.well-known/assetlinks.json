@@ -1,0 +1,26 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.vdr.awuta",
+      "sha256_cert_fingerprints": ["83:51:81:C8:E9:D1:A1:EB:1C:19:AE:2A:B4:35:53:3F:AE:E6:2F:82:49:DC:F7:35:1E:04:99:37:35:A3:73:83"]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.vdr.awuta.dev",
+      "sha256_cert_fingerprints": ["9F:39:EE:9E:B0:AA:1C:AA:33:85:79:71:83:69:59:BC:76:10:F6:38:C3:16:C6:1D:78:32:0A:78:A3:28:5B:D8"]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.vdr.awuta.staging",
+      "sha256_cert_fingerprints": ["TODO:STAGING_SHA256_FINGERPRINT"]
+    }
+  }
+]
